@@ -25,11 +25,11 @@ function Login() {
         password,
       });
 
-      console.log(res);
+      // console.log(res);
 
-      // localStorage.setItem("user", JSON.stringify(res.data));
-
-      // navigate("/");
+      localStorage.setItem("user", JSON.stringify(res.data));
+      navigate("/");
+      
     } catch (err) {
       console.log(err);
       setError(err.response.data.message);
