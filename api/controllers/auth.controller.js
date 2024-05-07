@@ -43,7 +43,7 @@ export const login = async (req, res) => {
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid)
-      return res.status(401).json({ message: 'Invalid Credentials!' });
+      return res.status(401).json({message : "Invalid Credentials!"});
 
     //generate cookie token and send to the user
     // res.setHeader("Set-Cookie", "test=" + "myValue").json("success")
@@ -57,6 +57,8 @@ export const login = async (req, res) => {
       { expiresIn: age }
     );
 
+    const {password:userPassword, ...userInfo} = user;
+
     res
       .cookie('token', token, {
         httpOnly: true,
@@ -64,10 +66,10 @@ export const login = async (req, res) => {
         maxAge: age,
       })
       .status(200)
-      .json({ message: 'Login Successful' });
+      .json();
   } catch(err){
     console.log(err);
-    res.status(500).send("Failed to create user");
+    res.status(500).json({message:"Failed to create user"});
 }
 };
 
